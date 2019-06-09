@@ -1,6 +1,6 @@
 // Generate random room name if needed
 if (!location.hash) {
-  location.hash = window.mwUnique.getUniqueID();
+  location.hash = getUniqueID();
 }
 const roomHash = location.hash.substring(1);
 
