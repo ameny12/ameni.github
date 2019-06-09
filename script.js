@@ -1,8 +1,10 @@
 // Generate random room name if needed
 if (!location.hash) {
-  location.hash = "Camera";
+  
+  var roomHash = document.getElementById('camera');
+ 
 }
-const roomHash = location.hash;
+
 
 // TODO: Replace with your own channel ID
 const drone = new ScaleDrone('yiS12Ts5RdNhebyM');
