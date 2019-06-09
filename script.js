@@ -1,6 +1,6 @@
 // Generate random room name if needed
 if (!location.hash) {
-  location.hash = "AMM";
+  location.hash = date.getYear();
 }
 const roomHash = location.hash;
 
