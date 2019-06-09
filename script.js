@@ -1,6 +1,6 @@
 // Generate random room name if needed
 if (!location.hash) {
-  location.hash = getUniqueID();
+  location.hash =Math.random().toString(36).substr(2, 9); 
 }
 const roomHash = location.hash.substring(1);
 
