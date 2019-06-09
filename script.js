@@ -1,6 +1,6 @@
 // Generate random room name if needed
 if (!location.hash) {
-  location.hash = document.getElementById(id);
+  location.hash = "Camera";
 }
 const roomHash = location.hash;
 
