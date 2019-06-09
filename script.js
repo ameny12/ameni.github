@@ -1,6 +1,11 @@
 // Generate random room name if needed
 if (!location.hash) {
- roomHash= window.crypto.getRandomValues();
+var roomHash = require('uuid-1345');
+
+UUID.v5({
+    namespace: roomHash.namespace.url,
+    name: "test"
+});
 
  
 }
