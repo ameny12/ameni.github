@@ -1,6 +1,6 @@
 // Generate random room name if needed
 if (!location.hash) {
-  location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
+  location.hash =Math.random().toString(36).substr(2, 9); 
 }
 const roomHash = location.hash.substring(1);
 
@@ -37,7 +37,7 @@ drone.on('open', error => {
   room.on('members', members => {
     console.log('MEMBERS', members);
     // If we are the second user to connect to the room we will be creating the offer
-   const isOfferer = members.length === 1 ;
+   const isOfferer = members.length === 2;
     startWebRTC(isOfferer);
   });
 });
