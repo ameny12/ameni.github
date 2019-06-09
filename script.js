@@ -2,7 +2,7 @@
 if (!location.hash) {
   location.hash = "AMM";
 }
-const roomHash = location.hash.substring(1);
+const roomHash = location.hash;
 
 // TODO: Replace with your own channel ID
 const drone = new ScaleDrone('yiS12Ts5RdNhebyM');
