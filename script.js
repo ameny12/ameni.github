@@ -1,6 +1,6 @@
 // Generate random room name if needed
 if (!location.hash) {
-  location.hash = date.getYear();
+  location.hash = document.getElementById(id);
 }
 const roomHash = location.hash;
 
