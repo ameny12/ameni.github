@@ -1,7 +1,7 @@
 // Generate random room name if needed
 if (!location.hash) {
-  
-  var roomHash = document.getElementById(id);
+ roomHash= window.crypto.getRandomValues();
+
  
 }
 
