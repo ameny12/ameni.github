@@ -1,6 +1,6 @@
 // Generate random room name if needed
 if (!location.hash) {
-  location.hash =Math.random().toString(36).substr(2, 9); 
+  location.hash =Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase() ;
 }
 const roomHash = location.hash.substring(1);
 
