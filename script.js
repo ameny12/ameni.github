@@ -1,12 +1,8 @@
 // Generate random room name if needed
 if (!location.hash) {
-var roomHash = require('uuid-1345');
-
-UUID.v5({
-    namespace: roomHash.namespace.url,
-    name: "test"
-});
-
+ location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
+}
+const roomHash = location.hash.substring(1);
  
 }
 
