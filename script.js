@@ -1,9 +1,10 @@
 // Generate random room name if needed
 if (!location.hash) {
- location.hash = "Camera";
+  location.hash ="Camera";
 }
-const roomHash = location.hash;
- // TODO: Replace with your own channel ID
+const roomHash = location.hash.substring(1);
+
+// TODO: Replace with your own channel ID
 const drone = new ScaleDrone('yiS12Ts5RdNhebyM');
 // Room name needs to be prefixed with 'observable-'
 const roomName = 'observable-' + roomHash;
@@ -36,9 +37,8 @@ drone.on('open', error => {
   room.on('members', members => {
     console.log('MEMBERS', members);
     // If we are the second user to connect to the room we will be creating the offer
-   const  members.length === 2;
-   const isanswer= members.length === 1;
-   startWebRTC(isanswer);
+    const isOfferer = members.length === 2;
+    startWebRTC(isOfferer);
   });
 });
 
@@ -50,7 +50,7 @@ function sendMessage(message) {
   });
 }
 
-function startWebRTC(isanwser) {
+function startWebRTC(isOfferer) {
   pc = new RTCPeerConnection(configuration);
 
   // 'onicecandidate' notifies us whenever an ICE agent needs to deliver a
@@ -64,7 +64,7 @@ function startWebRTC(isanwser) {
   // If user is offerer let the 'negotiationneeded' event create the offer
   if (isOfferer) {
     pc.onnegotiationneeded = () => {
-      pc.creatanswer().then(localDescCreated).catch(onError);
+      pc.createOffer({offerToReceiveVideo: false,offerToReceiveAudio: false}).then(localDescCreated).catch(onError);
     }
   }
 
@@ -98,7 +98,11 @@ function startWebRTC(isanwser) {
       pc.setRemoteDescription(new RTCSessionDescription(message.sdp), () => {
         // When receiving an offer lets answer it
         if (pc.remoteDescription.type === 'offer') {
-          pc.createOffer({offerToReceiveVideo: false,offerToReceiveAudio: false}).then(localDescCreated).catch(onError);
+          pc.createAnswer().then(localDescCreated).catch(onError);
+         obligatoire : {
+                    OfferToReceiveAudio :  false ;
+                    OfferToReceiveVideo :  false;
+                }
         }
       }, onError);
     } else if (message.candidate) {
