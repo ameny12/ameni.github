@@ -1,6 +1,6 @@
 // Generate random room name if needed
 if (!location.hash) {
-  location.hash ="Camera";
+  location.hash = "Camera";
 }
 const roomHash = location.hash.substring(1);
 
@@ -37,8 +37,8 @@ drone.on('open', error => {
   room.on('members', members => {
     console.log('MEMBERS', members);
     // If we are the second user to connect to the room we will be creating the offer
-    const   isOfferer=members.length === 2;
-   startWebRTC(isOfferer);
+    const isOfferer = members.length === 2;
+    startWebRTC(isOfferer);
   });
 });
 
@@ -64,7 +64,7 @@ function startWebRTC(isOfferer) {
   // If user is offerer let the 'negotiationneeded' event create the offer
   if (isOfferer) {
     pc.onnegotiationneeded = () => {
-      pc.createOffer(offerToReceiveAudio: false, offerToReceiveVideo: false).then(localDescCreated).catch(onError);
+      pc.createOffer({offerToReceiveVideo: false,offerToReceiveAudio: false}).then(localDescCreated).catch(onError);
     }
   }
 
@@ -98,8 +98,7 @@ function startWebRTC(isOfferer) {
       pc.setRemoteDescription(new RTCSessionDescription(message.sdp), () => {
         // When receiving an offer lets answer it
         if (pc.remoteDescription.type === 'offer') {
-       pc.createAnswer().then(localDescCreated).catch(onError);
-         
+          pc.createAnswer().then(localDescCreated).catch(onError);
         }
       }, onError);
     } else if (message.candidate) {
