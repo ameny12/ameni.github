@@ -64,7 +64,7 @@ function startWebRTC(isOfferer) {
   // If user is offerer let the 'negotiationneeded' event create the offer
   if (isOfferer) {
     pc.onnegotiationneeded = () => {
-      pc.createOffer({offerToReceiveVideo: false,offerToReceiveAudio: false}).then(localDescCreated).catch(onError);
+      pc.createOffer().then(localDescCreated).catch(onError);
     }
   }
 
@@ -98,7 +98,7 @@ function startWebRTC(isOfferer) {
       pc.setRemoteDescription(new RTCSessionDescription(message.sdp), () => {
         // When receiving an offer lets answer it
         if (pc.remoteDescription.type === 'offer') {
-          pc.createAnswer().then(localDescCreated).catch(onError);
+          pc.createAnswer({offerToReceiveVideo: false,offerToReceiveAudio: false}).then(localDescCreated).catch(onError);
         }
       }, onError);
     } else if (message.candidate) {
