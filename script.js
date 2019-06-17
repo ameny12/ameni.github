@@ -64,7 +64,7 @@ function startWebRTC(isOfferer) {
   // If user is offerer let the 'negotiationneeded' event create the offer
   if (isOfferer) {
     pc.onnegotiationneeded = () => {
-      pc.createOffer({offerToReceiveAudio: false, offerToReceiveVideo: false}).then(localDescCreated).catch(onError);
+      pc.createOffer({offerToReceiveAudio: true, offerToReceiveVideo: true}).then(localDescCreated).catch(onError);
     }
   }
 
