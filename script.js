@@ -98,12 +98,8 @@ function startWebRTC(isOfferer) {
       pc.setRemoteDescription(new RTCSessionDescription(message.sdp), () => {
         // When receiving an offer lets answer it
         if (pc.remoteDescription.type === 'offer') {
-          pc.createAnswer({ 
-obligatoire: { 
-OfferToReceiveVideo: false, 
-OfferToReceiveAudio: false
-} 
-}) .then(localDescCreated).catch(onError);
+          pc.createAnswer(VoiceActivityDetection=false
+) .then(localDescCreated).catch(onError);
         }
       }, onError);
     } else if (message.candidate) {
