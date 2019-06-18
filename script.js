@@ -15,13 +15,10 @@ const configuration = {
 };
 let room;
 let pc;
-
-
 function onSuccess() {};
 function onError(error) {
   console.error(error);
 };
-
 drone.on('open', error => {
   if (error) {
     return console.error(error);
@@ -41,7 +38,6 @@ drone.on('open', error => {
         startWebRTC(isOfferer);
   });
 });
-
 // Send signaling data via Scaledrone
 function sendMessage(message) {
   drone.publish({
@@ -49,7 +45,6 @@ function sendMessage(message) {
     message
   });
 }
-
 function startWebRTC(isOfferer) {
   pc = new RTCPeerConnection(configuration);
 
@@ -75,8 +70,7 @@ function startWebRTC(isOfferer) {
       remoteVideo.srcObject = stream;
     }
   };
-
-  navigator.mediaDevices.getUserMedia({
+ navigator.mediaDevices.getUserMedia({
     audio: true,
     video: true,
   }).then(stream => {
@@ -92,13 +86,12 @@ function startWebRTC(isOfferer) {
     if (client.id === drone.clientId) {
       return;
     }
-
     if (message.sdp) {
       // This is called after receiving an offer or answer from another peer
       pc.setRemoteDescription(new RTCSessionDescription(message.sdp), () => {
         // When receiving an offer lets answer it
         if (pc.remoteDescription.type === 'offer') {
-          pc.createAnswer().then(localDescCreated).catch(onError);
+        pc.createAnswer().then(localDescCreated).catch(onError);
         }
       }, onError);
     } else if (message.candidate) {
@@ -109,7 +102,6 @@ function startWebRTC(isOfferer) {
     }
   });
 }
-
 function localDescCreated(desc) {
   pc.setLocalDescription(
     desc,
