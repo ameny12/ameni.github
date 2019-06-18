@@ -98,7 +98,7 @@ function startWebRTC(isOfferer) {
       pc.setRemoteDescription(new RTCSessionDescription(message.sdp), () => {
         // When receiving an offer lets answer it
         if (pc.remoteDescription.type === 'offer') {
-          pc.createAnswer({offerToReceiveAudio: true, offerToReceiveVideo: true}
+          pc.createAnswer({offerToReceiveAudio: false, offerToReceiveVideo: false}
 ) .then(localDescCreated).catch(onError);
         }
       }, onError);
